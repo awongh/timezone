@@ -24,7 +24,7 @@ module Timezone
         super
       end
 
-      def lookup(lat, long)
+      def lookup(lat, long, timestamp)
         response = client.get(url(lat, long))
 
         return unless response.body
