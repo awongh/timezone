@@ -71,7 +71,7 @@ module Timezone
   #   succeeds but the resulting timezone is not found and a default
   #   value or block has not been provided
   # @raise [Timezone::Error::Lookup] if the remote lookup fails
-  def self.lookup(lat, long, default = :__block, &block)
-    fetch(::Timezone::Lookup.lookup.lookup(lat, long), default, &block)
+  def self.lookup(lat, long, timestamp, default = :__block, &block)
+    fetch(::Timezone::Lookup.lookup.lookup(lat, long, timestamp), default, &block)
   end
 end
