@@ -25,8 +25,10 @@ module Timezone
         super
       end
 
-      def lookup(lat, long)
-        response = client.get(url(lat, long))
+      def lookup(lat, long, timestamp=nil)
+
+        ts = timestamp ? timestamp : Time.now.to_i
+        response = client.get(url(lat, long, ts))
 
         if response.code == '403'.freeze
           raise(Timezone::Error::Google, '403 Forbidden'.freeze)
@@ -67,10 +69,10 @@ module Timezone
         end
       end
 
-      def url(lat, long)
+      def url(lat, long, timestamp)
         query = URI.encode_www_form(
           'location' => "#{lat},#{long}",
-          'timestamp' => Time.now.to_i
+          'timestamp' => timestamp
         )
 
         authorize("/maps/api/timezone/json?#{query}")
