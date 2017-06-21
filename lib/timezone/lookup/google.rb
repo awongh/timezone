@@ -25,7 +25,7 @@ module Timezone
         super
       end
 
-      def lookup(lat, long, timestamp=nil)
+      def lookup(lat, long, timestamp)
 
         ts = timestamp ? timestamp : Time.now.to_i
         response = client.get(url(lat, long, ts))
